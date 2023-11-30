@@ -4,14 +4,3 @@ version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-[[bin]]
-name = "replace-minmax"
-path = "src/bin/replace-minmax.rs"
-
-[[bin]]
-name = "check-code"
-path = "src/bin/check-code.rs"
-
-[[bin]]
-name = "smallest-pairs"
-path = "src/bin/smallest-pair.rs"
