@@ -6,13 +6,14 @@ fn main() {
     let n: i32 = n.trim().parse().unwrap();
 
     let mut vec: Vec<i32>;
-    // for _ in 0..n {
+
     let mut buf_input = String::new();
     stdin().read_line(&mut buf_input).unwrap();
     vec = buf_input
         .split_whitespace()
         .map(|n| n.parse::<i32>().unwrap())
         .collect();
+
     let max = vec.iter().max().unwrap();
     let min = vec.iter().min().unwrap();
 
