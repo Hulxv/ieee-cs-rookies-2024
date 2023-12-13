@@ -1,2 +1,4 @@
 target
 .vscode
+main.rs
+Cargo.lock
