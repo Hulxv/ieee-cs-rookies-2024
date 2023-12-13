@@ -1,5 +1,6 @@
-use std::{fmt, io::stdin};
+use std::{fmt, io::stdin, ops};
 
+#[derive(Clone)]
 struct BigInt {
     value: Vec<u64>,
 }
@@ -14,10 +15,14 @@ impl BigInt {
                 .collect::<Vec<u64>>(),
         }
     }
+}
 
-    fn add(&self, value: u64) -> Self {
+impl ops::Add<u64> for BigInt {
+    type Output = Self;
+
+    fn add(self, rhs: u64) -> Self::Output {
         let mut result = self.value.clone();
-        let mut carry = value;
+        let mut carry = rhs;
 
         for i in 0..result.len() {
             result[i] += carry;
@@ -32,13 +37,16 @@ impl BigInt {
 
         Self { value: result }
     }
+}
 
-    fn multiply(&self, value: u64) -> Self {
+impl ops::Mul<u64> for BigInt {
+    type Output = Self;
+    fn mul(self, rhs: u64) -> Self::Output {
         let mut result = Vec::new();
         let mut carry = 0;
 
         for &digit in self.value.iter() {
-            let product = digit * value + carry;
+            let product = digit * rhs + carry;
             result.push(product % 10);
             carry = product / 10;
         }
@@ -69,8 +77,8 @@ impl fmt::Display for BigInt {
 fn main() {
     let mut num = String::new();
     stdin().read_line(&mut num).unwrap();
-    let num = num.trim().to_string();
-    
-    println!("{}", BigInt::new(num.clone()).add(9999));
-    println!("{}", BigInt::new(num).multiply(9999));
+    let num = BigInt::new(num.trim().to_string());
+
+    println!("{}", num.clone() + 9999);
+    println!("{}", num * 9999);
 }
